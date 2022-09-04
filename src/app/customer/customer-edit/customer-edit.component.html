@@ -1,0 +1,62 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Flight</li>
+  </ol>
+</nav>
+<h2>Customer Detail</h2>
+<div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+<form   [formGroup]="customerForm"   (ngSubmit)="customerForm.valid && save(customer)"
+      novalidate>
+
+  <input type="hidden" id="id" name="id" value="0" formControlName="id">
+
+  <div class="form-group">
+    <label for="firstName">FirstName:</label>
+    <input  formControlName="firstName" id="firstName" name="firstName"
+           class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="firstName">lastName:</label>
+    <input   id="lastName" formControlName="lastName" name="lastName"
+           class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="firstName">phoneNumber:</label>
+    <input   id="phoneNumber" formControlName="phoneNumber" name="phoneNumber"
+           class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="firstName">dateOfBirth:</label>
+    <input  type="date" formControlName="dateOfBirth" id="dateOfBirth"
+           name="dateOfBirth" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="firstName">Mail Address:</label>
+    <input  id="email" type="email" name="email" formControlName="email"
+           class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="firstName">bankAccountNumber:</label>
+    <input   id="bankAccountNumber" formControlName="bankAccountNumber"
+           type="number" name="bankAccountNumber" class="form-control">
+  </div>
+  <div class="cross-validation-error-message alert alert-danger">
+    <h4> Form data is invalid.</h4>
+    <p>Customers isunique in database: By Firstname, Lastname and DateOfBirt and all fields is Required</p>
+    <p>
+     {{' Mail validate with this pattern ^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'}}
+    </p>
+    <p>
+      And During Create; validate your phone number to be a valid mobile number only
+    </p>
+  </div>
+  <hr>
+  <div class="align-content-end">
+    <button type="reset" class="btn btn-warning" [disabled]="customerForm.status==='VALID'">reset</button>
+    &nbsp;
+    <button class="btn btn-success" [disabled]="!customerForm.valid">Submit</button>
+  </div>
+
+
+</form>
